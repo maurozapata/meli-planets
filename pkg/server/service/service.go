@@ -14,7 +14,7 @@ func GetHealthStatus(db redis.IClient) Response {
 
 //GetWeather -
 func GetWeather(db redis.IClient, day string) Response {
-	val, err := db.Get(utils.GetWeatherKey(day))
+	value, err := db.Get(utils.GetWeatherKey(day))
 
 	if err != nil {
 		return Response{
@@ -25,6 +25,9 @@ func GetWeather(db redis.IClient, day string) Response {
 
 	return Response{
 		StatusCode: http.StatusOK,
-		Body:       val,
+		Body: map[string]interface{}{
+			"dia":   day,
+			"clima": value,
+		},
 	}
 }

@@ -1,8 +1,6 @@
 package server
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/meli-planets/pkg/redis"
 	"github.com/meli-planets/pkg/server/service"
@@ -32,15 +30,14 @@ func getWeather(c *gin.Context) {
 }
 
 func sendResponse(c *gin.Context, response service.Response) {
-	obj := gin.H{}
+	var obj interface{}
 
 	if response.Error != nil {
-		obj["error"] = response.Error.Error()
+		obj = map[string]interface{}{"error": response.Error.Error()}
 	}
 	if response.Body != nil {
-		obj["body"] = response.Body
+		obj = response.Body
 	}
-	obj["status"] = http.StatusText(response.StatusCode)
 
 	c.JSON(response.StatusCode, obj)
 }
