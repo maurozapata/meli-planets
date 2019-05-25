@@ -6,9 +6,29 @@ import (
 	"github.com/meli-planets/pkg/specialist"
 )
 
-// func TestBelongsToTheFunction(t *testing.T) {
+func TestBelongsToTheLinealFunction(t *testing.T) {
+	aux := []struct {
+		x1, x2, x, y1, y2, y float64
+		expectedValue        bool
+	}{
+		{x1: -1, y1: -1, x2: 0, y2: 0, x: 1, y: 1, expectedValue: true},
+		{x1: -3, y1: 0, x2: 0, y2: 0, x: 7, y: 0, expectedValue: true},
+		{x1: 0, y1: -3, x2: 0, y2: 0, x: 0, y: 4, expectedValue: true},
+		{x1: -3, y1: -2, x2: -1, y2: 0, x: 1, y: 2, expectedValue: true},
+		{x1: -1, y1: -1, x2: 1, y2: -1, x: 10, y: 0, expectedValue: false},
+		{x1: -1, y1: -1, x2: 1, y2: -1, x: 0, y: 10, expectedValue: false},
+		{x1: -1, y1: -1, x2: 1, y2: -1, x: 3, y: 3, expectedValue: false},
+		{x1: -1, y1: -1, x2: 1, y2: -1, x: -3, y: -3, expectedValue: false},
+		{x1: -1, y1: -1, x2: 1, y2: -1, x: -0, y: -3, expectedValue: false},
+		{x1: -1, y1: -1, x2: 1, y2: -1, x: -1, y: 1, expectedValue: false},
+	}
 
-// }
+	for _, v := range aux {
+		if specialist.BelongsToTheLinealFunction(v.x1, v.y1, v.x2, v.y2, v.x, v.y) != v.expectedValue {
+			t.Fail()
+		}
+	}
+}
 
 func TestIsInsideTheTriangle(t *testing.T) {
 	aux := []struct {

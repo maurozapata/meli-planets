@@ -2,8 +2,8 @@ package specialist
 
 import "math"
 
-//BelongsToTheFunction -
-func BelongsToTheFunction(x1, y1, x2, y2, x, y float64) bool {
+//BelongsToTheLinealFunction -
+func BelongsToTheLinealFunction(x1, y1, x2, y2, x, y float64) bool {
 	if (x == x1 && x == x2) || (y == y1 && y == y2) {
 		return true
 	}

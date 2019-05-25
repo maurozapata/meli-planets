@@ -9,8 +9,8 @@ func GetWeather(galaxy *model.Galaxy) string {
 
 	x3, y3 := galaxy.Planets[2].GetCoordinates()
 
-	if BelongsToTheFunction(x1, y1, x2, y2, x3, y3) {
-		if BelongsToTheFunction(x1, y1, x2, y2, 0, 0) {
+	if BelongsToTheLinealFunction(x1, y1, x2, y2, x3, y3) {
+		if BelongsToTheLinealFunction(x1, y1, x2, y2, 0, 0) {
 			return "SEQUIA"
 		}
 		return "PRESION Y TEMPERATURA OPTIMA"
