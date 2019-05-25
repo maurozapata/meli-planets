@@ -81,9 +81,7 @@ func GetCurrentWeather(galaxy *model.Galaxy) string {
 			return DROUGHT
 		}
 		return OPTIMALPRESSUREANDTEMPERATURE
-	}
-
-	if IsInsideTheTriangle(x1, y1, x2, y2, x3, y3, 0, 0) {
+	} else if IsInsideTheTriangle(x1, y1, x2, y2, x3, y3, 0, 0) {
 		return RAIN
 	}
 

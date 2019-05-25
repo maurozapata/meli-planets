@@ -1,6 +1,7 @@
 package specialist_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/meli-planets/pkg/specialist"
@@ -47,6 +48,25 @@ func TestIsInsideTheTriangle(t *testing.T) {
 
 	for _, v := range aux {
 		if specialist.IsInsideTheTriangle(v.x1, v.y1, v.x2, v.y2, v.x3, v.y3, v.x, v.y) != v.expectedValue {
+			t.Fail()
+		}
+	}
+}
+
+func TestGetPerimeterOgTriangle(t *testing.T) {
+	aux := []struct {
+		x1, x2, x3, y1, y2, y3 float64
+		expectedValue          float64
+	}{
+		{x1: -1, y1: -1, x2: 1, y2: -1, x3: 1, y3: 1, expectedValue: 6.83},
+		{x1: -3, y1: -3, x2: 3, y2: -3, x3: 3, y3: 3, expectedValue: 20.49},
+		{x1: -7, y1: -1, x2: 5, y2: -1, x3: 3, y3: 1, expectedValue: 25.03},
+		{x1: -4, y1: 0, x2: 9, y2: -2, x3: 4, y3: 8, expectedValue: 35.64},
+	}
+
+	for _, v := range aux {
+		if specialist.GetPerimeterOfTriangle(v.x1, v.y1, v.x2, v.y2, v.x3, v.y3) != v.expectedValue {
+			fmt.Println(specialist.GetPerimeterOfTriangle(v.x1, v.y1, v.x2, v.y2, v.x3, v.y3))
 			t.Fail()
 		}
 	}
