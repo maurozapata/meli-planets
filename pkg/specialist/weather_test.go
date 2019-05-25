@@ -13,7 +13,7 @@ func TestGetWeather(t *testing.T) {
 	p3 := model.NewPlanet("", 1, true, 2000, 270)
 	g := model.NewGalaxy(p1, p2, p3)
 
-	if specialist.GetWeather(g) != "SEQUIA" {
+	if specialist.GetCurrentWeather(g) != "sequia" {
 		t.Fail()
 	}
 }
