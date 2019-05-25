@@ -12,5 +12,4 @@
 *.out
 
 .env
-coverage2.html
 coverage.html

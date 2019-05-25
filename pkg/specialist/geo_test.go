@@ -53,7 +53,7 @@ func TestIsInsideTheTriangle(t *testing.T) {
 	}
 }
 
-func TestGetPerimeterOgTriangle(t *testing.T) {
+func TestGetPerimeterOfTriangle(t *testing.T) {
 	aux := []struct {
 		x1, x2, x3, y1, y2, y3 float64
 		expectedValue          float64
