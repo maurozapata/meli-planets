@@ -1,7 +1,7 @@
 package utils
 
 var (
-	baseWeatherKey = "distantGalaxy:weather:"
+	baseWeatherKey = "distantGalaxy:weather:day:"
 )
 
 //GetWeatherKey -

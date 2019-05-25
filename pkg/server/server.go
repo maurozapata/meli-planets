@@ -1,7 +1,10 @@
 package server
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
+	"github.com/meli-planets/pkg/middleware"
 	"github.com/meli-planets/pkg/redis"
 	"github.com/meli-planets/pkg/server/service"
 )
@@ -14,6 +17,8 @@ func GetEngine(db redis.IClient) *gin.Engine {
 
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
+
+	r.Use(middleware.Authentication(os.Getenv("API_AUTH_TOKEN")))
 
 	r.GET("/health", getHealthStatus)
 	r.GET("/weather/:day", getWeather)

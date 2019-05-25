@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/meli-planets/pkg/redis"
@@ -9,7 +10,18 @@ import (
 
 //GetHealthStatus -
 func GetHealthStatus(db redis.IClient) Response {
-	return Response{}
+
+	if err := db.Ping(); err != nil {
+		return Response{
+			StatusCode: http.StatusServiceUnavailable,
+			Error:      errors.New("Service unavailable"),
+		}
+	}
+
+	return Response{
+		StatusCode: http.StatusOK,
+		Body:       "Live long and prosper!",
+	}
 }
 
 //GetWeather -
@@ -19,7 +31,7 @@ func GetWeather(db redis.IClient, day string) Response {
 	if err != nil {
 		return Response{
 			StatusCode: http.StatusNotFound,
-			Error:      err,
+			Error:      errors.New("Wheather not found"),
 		}
 	}
 

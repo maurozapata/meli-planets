@@ -6,6 +6,7 @@ import (
 
 //IClient -
 type IClient interface {
+	Ping() error
 	Get(key string) (interface{}, error)
 	Set(key string, value interface{}) error
 }
@@ -36,6 +37,12 @@ func Init(params Params) (*Client, error) {
 	}
 
 	return &Client{db: client}, nil
+}
+
+//Ping -
+func (c *Client) Ping() error {
+	_, err := c.db.Ping().Result()
+	return err
 }
 
 //Get -
