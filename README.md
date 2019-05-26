@@ -37,3 +37,31 @@ go run cmd/server/main.go
 * Como se realizan cálculos matemáticos, a fin de simplificar las cuentas, la precisión en los cálculos matemáticos será de 2 decimales.
 
 * En caso de que el sol se encuentre en el perímetro del triángulo no se lo considerara dentro de él.
+
+## Resultados
+* ¿Cuántos períodos de sequía habrá?
+```
+Periodos de sequia: 
+40
+```
+* ¿Cuántos períodos de lluvia habrá y qué día será el pico máximo de lluvia?
+```
+Periodos de lluvia: 
+81
+
+Picos de lluvia los dias: 
+72, 108, 252, 288, 432, 468, 612, 648, 792, 828, 972, 1008, 1152, 1188, 1332, 1368, 1512, 1548, 1692, 
+1728, 1872, 1908, 2052, 2088, 2232, 2268, 2412, 2448, 2592, 2628, 2772, 2808, 2952, 2988, 3132, 3168, 
+3312, 3348, 3492, 3528
+```
+* ¿Cuántos períodos de condiciones óptimas de presión y temperatura habrá?
+```
+No habra periodos de condiciones optimas
+```
+
+### Bonus
+Se deployo el servicio en Google Cloud Platform
+```
+GET → http://api.thedistantgalaxy.com/clima?dia=566 → Respuesta: {“dia”:566, “clima”:”lluvia”}
+```
+Es necesario añadir un header de Authorization con el token correspondiente
