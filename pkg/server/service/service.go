@@ -21,7 +21,7 @@ func GetHealthStatus(db redis.IClient) Response {
 
 	return Response{
 		StatusCode: http.StatusOK,
-		Body:       "Live long and prosper!",
+		Body:       map[string]string{"Body": "Live long and prosper!"},
 	}
 }
 
