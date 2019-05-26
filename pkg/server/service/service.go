@@ -3,6 +3,7 @@ package service
 import (
 	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/meli-planets/pkg/redis"
 	"github.com/meli-planets/pkg/utils"
@@ -26,11 +27,17 @@ func GetHealthStatus(db redis.IClient) Response {
 
 //GetWeather -
 func GetWeather(db redis.IClient, day string) Response {
-	value, err := db.Get(utils.GetWeatherKey(day))
+	if err := validParamDay(day); err != nil {
+		return Response{
+			StatusCode: http.StatusBadRequest,
+			Error:      err,
+		}
+	}
 
+	value, err := db.Get(utils.GetWeatherKey(day))
 	if err != nil {
 		return Response{
-			StatusCode: http.StatusNotFound,
+			StatusCode: http.StatusInternalServerError,
 			Error:      errors.New("Wheather not found"),
 		}
 	}
@@ -42,4 +49,16 @@ func GetWeather(db redis.IClient, day string) Response {
 			"clima": value,
 		},
 	}
+}
+
+func validParamDay(day string) error {
+	if day == "" {
+		return errors.New("Param:day can't by empty")
+	}
+
+	if _, err := strconv.Atoi(day); err != nil {
+		return errors.New("Param:day must by integer")
+	}
+
+	return nil
 }
