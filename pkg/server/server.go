@@ -21,7 +21,7 @@ func GetEngine(db redis.IClient) *gin.Engine {
 	r.Use(middleware.Authentication(os.Getenv("API_AUTH_TOKEN")))
 
 	r.GET("/health", getHealthStatus)
-	r.GET("/weather/:day", getWeather)
+	r.GET("/clima", getWeather)
 
 	return r
 }
@@ -31,7 +31,7 @@ func getHealthStatus(c *gin.Context) {
 }
 
 func getWeather(c *gin.Context) {
-	sendResponse(c, service.GetWeather(_db, c.Param("day")))
+	sendResponse(c, service.GetWeather(_db, c.Query("dia")))
 }
 
 func sendResponse(c *gin.Context, response service.Response) {
