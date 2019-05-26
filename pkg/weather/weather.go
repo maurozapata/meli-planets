@@ -70,7 +70,6 @@ func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 }
 
 func getPerimeterOfGalaxy(galaxy *model.Galaxy) float64 {
-
 	if len(galaxy.Planets) < 3 {
 		return 0
 	}
@@ -84,7 +83,6 @@ func getPerimeterOfGalaxy(galaxy *model.Galaxy) float64 {
 
 //GetCurrentWeather returns the current weather of the galaxy
 func GetCurrentWeather(galaxy *model.Galaxy) string {
-
 	if len(galaxy.Planets) < 3 {
 		return IMPOSSIBLETOPREDICT
 	}
