@@ -30,7 +30,7 @@ func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 	maxRainDays := []int{}
 
 	yesterdaysweather := ""
-	for i := 0; i < days; i++ {
+	for i := 1; i <= days; i++ {
 		galaxy.Aging(1)
 
 		weather := GetCurrentWeather(galaxy)
