@@ -6,9 +6,9 @@ import (
 	"strconv"
 
 	"github.com/joho/godotenv"
+	"github.com/meli-planets/pkg/keyfactory"
 	"github.com/meli-planets/pkg/model"
 	"github.com/meli-planets/pkg/redis"
-	"github.com/meli-planets/pkg/utils"
 	"github.com/meli-planets/pkg/weather"
 )
 
@@ -32,7 +32,7 @@ func main() {
 
 	weatherPerDay := weather.PredictExtendedWeather(distantGalaxy, 3650)
 	for key, value := range weatherPerDay {
-		if db.Set(utils.GetWeatherKey(strconv.Itoa(key)), value) != nil {
+		if db.Set(keyfactory.GetWeather(strconv.Itoa(key)), value) != nil {
 			panic("Set: unable to connect redisdb")
 		}
 	}

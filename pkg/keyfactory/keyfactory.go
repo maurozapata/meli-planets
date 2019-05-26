@@ -1,10 +1,10 @@
-package utils
+package keyfactory
 
 var (
 	baseWeatherKey = "distantGalaxy:weather:day:"
 )
 
-//GetWeatherKey -
-func GetWeatherKey(key string) string {
+//GetWeather -
+func GetWeather(key string) string {
 	return baseWeatherKey + key
 }

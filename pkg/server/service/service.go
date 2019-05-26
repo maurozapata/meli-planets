@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/meli-planets/pkg/keyfactory"
 	"github.com/meli-planets/pkg/redis"
-	"github.com/meli-planets/pkg/utils"
 )
 
 //GetHealthStatus -
@@ -34,7 +34,7 @@ func GetWeather(db redis.IClient, day string) Response {
 		}
 	}
 
-	value, err := db.Get(utils.GetWeatherKey(day))
+	value, err := db.Get(keyfactory.GetWeather(day))
 	if err != nil {
 		return Response{
 			StatusCode: http.StatusInternalServerError,
