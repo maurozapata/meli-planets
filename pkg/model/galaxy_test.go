@@ -14,7 +14,6 @@ func TestAgingGalaxy(t *testing.T) {
 	galaxy.Aging(21)
 
 	if planet1.Angle != 339 || planet2.Angle != 221 {
-
 		t.Fail()
 	}
 }

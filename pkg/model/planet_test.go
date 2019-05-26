@@ -51,9 +51,9 @@ func TestAgingCounterclockwise(t *testing.T) {
 func TestGetCoordinates(t *testing.T) {
 	planet := model.NewPlanet("Ferengi", 4, false, 500, 136)
 
-	x, y := planet.GetCoordinates()
+	p := planet.GetCoordinates()
 
-	if x != -359.67 || y != 347.33 {
+	if p.X != -359.67 || p.Y != 347.33 {
 		t.Fail()
 	}
 }

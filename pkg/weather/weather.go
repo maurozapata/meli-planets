@@ -1,8 +1,9 @@
-package specialist
+package weather
 
 import (
 	"fmt"
 
+	"github.com/meli-planets/pkg/geo"
 	"github.com/meli-planets/pkg/model"
 )
 
@@ -56,32 +57,33 @@ func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 	for _, v := range maxPerimeterDays {
 		weatherPerDay[v] = MAXRAIN
 	}
-
+	fmt.Println(maxPerimeterDays)
+	fmt.Println(maxPerimeter)
 	fmt.Println(periods)
 
 	return weatherPerDay
 }
 
 func getPerimeterOfGalaxy(galaxy *model.Galaxy) float64 {
-	x1, y1 := galaxy.Planets[0].GetCoordinates()
-	x2, y2 := galaxy.Planets[1].GetCoordinates()
-	x3, y3 := galaxy.Planets[2].GetCoordinates()
+	p1 := galaxy.Planets[0].GetCoordinates()
+	p2 := galaxy.Planets[1].GetCoordinates()
+	p3 := galaxy.Planets[2].GetCoordinates()
 
-	return GetPerimeterOfTriangle(x1, y1, x2, y2, x3, y3)
+	return geo.GetPerimeterOfTriangle(p1, p2, p3)
 }
 
 //GetCurrentWeather -
 func GetCurrentWeather(galaxy *model.Galaxy) string {
-	x1, y1 := galaxy.Planets[0].GetCoordinates()
-	x2, y2 := galaxy.Planets[1].GetCoordinates()
-	x3, y3 := galaxy.Planets[2].GetCoordinates()
+	p1 := galaxy.Planets[0].GetCoordinates()
+	p2 := galaxy.Planets[1].GetCoordinates()
+	p3 := galaxy.Planets[2].GetCoordinates()
 
-	if BelongsToTheLinealFunction(x1, y1, x2, y2, x3, y3) {
-		if BelongsToTheLinealFunction(x1, y1, x2, y2, 0, 0) {
+	if geo.BelongsToTheLinealFunction(p1, p2, p3) {
+		if geo.BelongsToTheLinealFunction(p1, p2, geo.NewPoint(0, 0)) {
 			return DROUGHT
 		}
 		return OPTIMALPRESSUREANDTEMPERATURE
-	} else if IsInsideTheTriangle(x1, y1, x2, y2, x3, y3, 0, 0) {
+	} else if geo.IsInsideTheTriangle(p1, p2, p3, geo.NewPoint(0, 0)) {
 		return RAIN
 	}
 

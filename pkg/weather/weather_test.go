@@ -1,10 +1,10 @@
-package specialist_test
+package weather_test
 
 import (
 	"testing"
 
 	"github.com/meli-planets/pkg/model"
-	"github.com/meli-planets/pkg/specialist"
+	"github.com/meli-planets/pkg/weather"
 )
 
 func TestGetWeather(t *testing.T) {
@@ -16,32 +16,32 @@ func TestGetWeather(t *testing.T) {
 			p1:            model.NewPlanet("", 1, true, 500, 90),
 			p2:            model.NewPlanet("", 1, true, 1000, 270),
 			p3:            model.NewPlanet("", 1, false, 2000, 270),
-			expectedValue: specialist.DROUGHT,
+			expectedValue: weather.DROUGHT,
 		},
 		{
 			p1:            model.NewPlanet("", 1, true, 500, 93),
 			p2:            model.NewPlanet("", 1, true, 1000, 204),
 			p3:            model.NewPlanet("", 1, true, 2000, 270),
-			expectedValue: specialist.OTHER,
+			expectedValue: weather.OTHER,
 		},
 		{
 			p1:            model.NewPlanet("", 1, true, 500, 0),
 			p2:            model.NewPlanet("", 1, true, 1000, 120),
 			p3:            model.NewPlanet("", 1, true, 2000, 240),
-			expectedValue: specialist.RAIN,
+			expectedValue: weather.RAIN,
 		},
 		{
 			p1:            model.NewPlanet("", 1, true, 5, 53.13),
 			p2:            model.NewPlanet("", 1, true, 5, 306.87),
 			p3:            model.NewPlanet("", 1, true, 3, 0),
-			expectedValue: specialist.OPTIMALPRESSUREANDTEMPERATURE,
+			expectedValue: weather.OPTIMALPRESSUREANDTEMPERATURE,
 		},
 	}
 
 	for _, v := range aux {
 		g := model.NewGalaxy(v.p1, v.p2, v.p3)
 
-		if specialist.GetCurrentWeather(g) != v.expectedValue {
+		if weather.GetCurrentWeather(g) != v.expectedValue {
 			t.Fail()
 		}
 	}
@@ -64,7 +64,7 @@ func TestPredictExtendedWeather(t *testing.T) {
 		79:  "otro",
 	}
 
-	weatherPerDay := specialist.PredictExtendedWeather(g, 200)
+	weatherPerDay := weather.PredictExtendedWeather(g, 200)
 
 	for day, weather := range expectedValues {
 		if weatherPerDay[day] != weather {

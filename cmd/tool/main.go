@@ -8,8 +8,8 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/meli-planets/pkg/model"
 	"github.com/meli-planets/pkg/redis"
-	"github.com/meli-planets/pkg/specialist"
 	"github.com/meli-planets/pkg/utils"
+	"github.com/meli-planets/pkg/weather"
 )
 
 func main() {
@@ -26,13 +26,13 @@ func main() {
 		return
 	}
 
-	ferengi := model.NewPlanet("Ferengi", 1, true, 500, 0)
+	ferengi := model.NewPlanet("Ferengi", 4.3, true, 500, 0)
 	betasoide := model.NewPlanet("Betasoide", 3, true, 2000, 0)
 	vulcano := model.NewPlanet("Vulcano", 5, false, 1000, 0)
 
 	distantGalaxy := model.NewGalaxy(ferengi, vulcano, betasoide)
 
-	weatherPerDay := specialist.PredictExtendedWeather(distantGalaxy, 3650)
+	weatherPerDay := weather.PredictExtendedWeather(distantGalaxy, 3650)
 	for key, value := range weatherPerDay {
 		db.Set(utils.GetWeatherKey(strconv.Itoa(key)), value)
 	}
