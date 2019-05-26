@@ -66,7 +66,26 @@ func TestGetPerimeterOfTriangle(t *testing.T) {
 
 	for _, v := range aux {
 		if geo.GetPerimeterOfTriangle(v.p1, v.p2, v.p3) != v.expectedValue {
-			fmt.Println(geo.GetPerimeterOfTriangle(v.p1, v.p2, v.p3))
+			t.Fail()
+		}
+	}
+}
+
+func TestPolarToCartesian(t *testing.T) {
+	aux := []struct {
+		angle, radio  float64
+		expectedValue geo.Point
+	}{
+		{angle: 0, radio: 500, expectedValue: geo.NewPoint(500, 0)},
+		{angle: 90, radio: 500, expectedValue: geo.NewPoint(0, 500)},
+		{angle: 180, radio: 500, expectedValue: geo.NewPoint(-500, 0)},
+		{angle: 270, radio: 500, expectedValue: geo.NewPoint(0, -500)},
+	}
+
+	for _, v := range aux {
+		p := geo.PolarToCartesian(v.angle, v.radio)
+		if p.X != v.expectedValue.X || p.Y != v.expectedValue.Y {
+			fmt.Println(geo.PolarToCartesian(v.angle, v.radio))
 			t.Fail()
 		}
 	}

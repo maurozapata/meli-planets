@@ -44,6 +44,14 @@ func GetPerimeterOfTriangle(p1, p2, p3 Point) float64 {
 	return math.Round(p*100) / 100
 }
 
+//PolarToCartesian -
+func PolarToCartesian(angle, radio float64) Point {
+	x := radio * math.Cos(angle*math.Pi/180)
+	y := radio * math.Sin(angle*math.Pi/180)
+
+	return NewPoint(math.Round(x*100)/100, math.Round(y*100)/100)
+}
+
 func getDistanceBetweenTwoPoints(p1, p2 Point) float64 {
 	d := math.Sqrt(math.Pow(p2.X-p1.X, 2) + math.Pow(p2.Y-p1.Y, 2))
 

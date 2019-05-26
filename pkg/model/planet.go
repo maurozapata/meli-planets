@@ -47,9 +47,5 @@ func (p *Planet) Aging(days float64) {
 
 //GetCoordinates -
 func (p *Planet) GetCoordinates() geo.Point {
-	x := p.Radio * math.Cos(p.Angle*math.Pi/180)
-	y := p.Radio * math.Sin(p.Angle*math.Pi/180)
-
-	return geo.NewPoint(math.Round(x*100)/100, math.Round(y*100)/100)
-
+	return geo.PolarToCartesian(p.Angle, p.Radio)
 }
