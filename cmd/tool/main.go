@@ -20,7 +20,7 @@ func main() {
 
 	db, err := initRedis()
 	if err != nil {
-		fmt.Println("Unable to connect redisdb")
+		fmt.Println("Connect: unable to connect redisdb")
 		return
 	}
 
@@ -28,11 +28,13 @@ func main() {
 	betasoide := model.NewPlanet("Betasoide", 3, true, 2000, 0)
 	vulcano := model.NewPlanet("Vulcano", 5, false, 1000, 0)
 
-	distantGalaxy := model.NewGalaxy(ferengi, vulcano, betasoide)
+	distantGalaxy := model.NewGalaxy(ferengi, betasoide, vulcano)
 
 	weatherPerDay := weather.PredictExtendedWeather(distantGalaxy, 3650)
 	for key, value := range weatherPerDay {
-		db.Set(utils.GetWeatherKey(strconv.Itoa(key)), value)
+		if db.Set(utils.GetWeatherKey(strconv.Itoa(key)), value) != nil {
+			panic("Set: unable to connect redisdb")
+		}
 	}
 
 }

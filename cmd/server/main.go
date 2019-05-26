@@ -19,7 +19,7 @@ func main() {
 
 	db, err := initRedis()
 	if err != nil {
-		panic("Unable to connect redisdb")
+		panic("Connect: unable to connect redisdb")
 	}
 
 	server := server.GetEngine(db)
