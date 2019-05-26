@@ -13,8 +13,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Tool started")
-
 	if godotenv.Load(".env") != nil {
 		fmt.Println("Error loading .env file")
 		return

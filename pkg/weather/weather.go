@@ -27,7 +27,7 @@ func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 	weatherPerDay := map[int]string{}
 
 	var maxPerimeter float64
-	maxPerimeterDays := []int{}
+	maxRainDays := []int{}
 
 	yesterdaysweather := ""
 	for i := 0; i < days; i++ {
@@ -42,9 +42,9 @@ func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 			perimeter := getPerimeterOfGalaxy(galaxy)
 			if perimeter > maxPerimeter {
 				maxPerimeter = perimeter
-				maxPerimeterDays = []int{i}
+				maxRainDays = []int{i}
 			} else if perimeter == maxPerimeter {
-				maxPerimeterDays = append(maxPerimeterDays, i)
+				maxRainDays = append(maxRainDays, i)
 			}
 		}
 
@@ -54,12 +54,15 @@ func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 	}
 	periods[yesterdaysweather]++
 
-	for _, v := range maxPerimeterDays {
+	for _, v := range maxRainDays {
 		weatherPerDay[v] = MAXRAIN
 	}
-	fmt.Println(maxPerimeterDays)
-	fmt.Println(maxPerimeter)
-	fmt.Println(periods)
+
+	for weather, cant := range periods {
+		fmt.Println(weather, "-", cant)
+	}
+	fmt.Println("max rain days -", maxRainDays)
+	fmt.Println("max perimeter -", maxPerimeter)
 
 	return weatherPerDay
 }
