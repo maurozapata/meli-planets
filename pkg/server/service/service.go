@@ -53,11 +53,11 @@ func GetWeather(db redis.IClient, day string) Response {
 
 func validParamDay(day string) error {
 	if day == "" {
-		return errors.New("Param:day can't by empty")
+		return errors.New("Param:day can't be empty")
 	}
 
 	if _, err := strconv.Atoi(day); err != nil {
-		return errors.New("Param:day must by integer")
+		return errors.New("Param:day must be integer")
 	}
 
 	return nil
