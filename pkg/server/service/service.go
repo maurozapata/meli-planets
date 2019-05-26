@@ -27,7 +27,7 @@ func GetHealthStatus(db redis.IClient) Response {
 
 //GetWeather -
 func GetWeather(db redis.IClient, day string) Response {
-	if err := validParamDay(day); err != nil {
+	if err := validateParamDay(day); err != nil {
 		return Response{
 			StatusCode: http.StatusBadRequest,
 			Error:      err,
@@ -51,7 +51,7 @@ func GetWeather(db redis.IClient, day string) Response {
 	}
 }
 
-func validParamDay(day string) error {
+func validateParamDay(day string) error {
 	if day == "" {
 		return errors.New("Param:day can't be empty")
 	}
