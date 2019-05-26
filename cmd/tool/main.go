@@ -26,7 +26,7 @@ func main() {
 		return
 	}
 
-	ferengi := model.NewPlanet("Ferengi", 4.3, true, 500, 0)
+	ferengi := model.NewPlanet("Ferengi", 1, true, 500, 0)
 	betasoide := model.NewPlanet("Betasoide", 3, true, 2000, 0)
 	vulcano := model.NewPlanet("Vulcano", 5, false, 1000, 0)
 
