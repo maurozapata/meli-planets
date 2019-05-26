@@ -9,37 +9,33 @@ import (
 
 func TestGetWeather(t *testing.T) {
 	aux := []struct {
-		p1, p2, p3    *model.Planet
+		planets       []*model.Planet
 		expectedValue string
 	}{
 		{
-			p1:            model.NewPlanet("", 1, true, 500, 90),
-			p2:            model.NewPlanet("", 1, true, 1000, 270),
-			p3:            model.NewPlanet("", 1, false, 2000, 270),
+			planets:       []*model.Planet{model.NewPlanet("", 1, true, 500, 90), model.NewPlanet("", 1, true, 1000, 270), model.NewPlanet("", 1, false, 2000, 270)},
 			expectedValue: weather.DROUGHT,
 		},
 		{
-			p1:            model.NewPlanet("", 1, true, 500, 93),
-			p2:            model.NewPlanet("", 1, true, 1000, 204),
-			p3:            model.NewPlanet("", 1, true, 2000, 270),
+			planets:       []*model.Planet{model.NewPlanet("", 1, true, 500, 93), model.NewPlanet("", 1, true, 1000, 204), model.NewPlanet("", 1, true, 2000, 270)},
 			expectedValue: weather.OTHER,
 		},
 		{
-			p1:            model.NewPlanet("", 1, true, 500, 0),
-			p2:            model.NewPlanet("", 1, true, 1000, 120),
-			p3:            model.NewPlanet("", 1, true, 2000, 240),
+			planets:       []*model.Planet{model.NewPlanet("", 1, true, 500, 0), model.NewPlanet("", 1, true, 1000, 120), model.NewPlanet("", 1, true, 2000, 240)},
 			expectedValue: weather.RAIN,
 		},
 		{
-			p1:            model.NewPlanet("", 1, true, 5, 53.13),
-			p2:            model.NewPlanet("", 1, true, 5, 306.87),
-			p3:            model.NewPlanet("", 1, true, 3, 0),
+			planets:       []*model.Planet{model.NewPlanet("", 1, true, 5, 53.13), model.NewPlanet("", 1, true, 5, 306.87), model.NewPlanet("", 1, true, 3, 0)},
 			expectedValue: weather.OPTIMALPRESSUREANDTEMPERATURE,
+		},
+		{
+			planets:       []*model.Planet{model.NewPlanet("", 1, true, 5, 53.13), model.NewPlanet("", 1, true, 3, 0)},
+			expectedValue: weather.IMPOSSIBLETOPREDICT,
 		},
 	}
 
 	for _, v := range aux {
-		g := model.NewGalaxy(v.p1, v.p2, v.p3)
+		g := model.NewGalaxy(v.planets...)
 
 		if weather.GetCurrentWeather(g) != v.expectedValue {
 			t.Fail()

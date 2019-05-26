@@ -18,6 +18,8 @@ const (
 	OTHER = "otro"
 	//OPTIMALPRESSUREANDTEMPERATURE -
 	OPTIMALPRESSUREANDTEMPERATURE = "presion y temperatura optima"
+	//IMPOSSIBLETOPREDICT -
+	IMPOSSIBLETOPREDICT = "imposible predecir"
 )
 
 //PredictExtendedWeather -
@@ -68,6 +70,11 @@ func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 }
 
 func getPerimeterOfGalaxy(galaxy *model.Galaxy) float64 {
+
+	if len(galaxy.Planets) < 3 {
+		return 0
+	}
+
 	p1 := galaxy.Planets[0].GetCoordinates()
 	p2 := galaxy.Planets[1].GetCoordinates()
 	p3 := galaxy.Planets[2].GetCoordinates()
@@ -77,6 +84,11 @@ func getPerimeterOfGalaxy(galaxy *model.Galaxy) float64 {
 
 //GetCurrentWeather -
 func GetCurrentWeather(galaxy *model.Galaxy) string {
+
+	if len(galaxy.Planets) < 3 {
+		return IMPOSSIBLETOPREDICT
+	}
+
 	p1 := galaxy.Planets[0].GetCoordinates()
 	p2 := galaxy.Planets[1].GetCoordinates()
 	p3 := galaxy.Planets[2].GetCoordinates()
