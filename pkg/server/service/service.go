@@ -9,7 +9,7 @@ import (
 	"github.com/meli-planets/pkg/redis"
 )
 
-//GetHealthStatus -
+//GetHealthStatus returns the status of the server
 func GetHealthStatus(db redis.IClient) Response {
 
 	if err := db.Ping(); err != nil {
@@ -25,7 +25,7 @@ func GetHealthStatus(db redis.IClient) Response {
 	}
 }
 
-//GetWeather -
+//GetWeather returns the weather of the given day
 func GetWeather(db redis.IClient, day string) Response {
 	if err := validateParamDay(day); err != nil {
 		return Response{

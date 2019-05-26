@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//Authentication -
+//Authentication returns a middleware that allows to authenticate the request
 func Authentication(token string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		t := c.GetHeader("Authorization")

@@ -15,7 +15,7 @@ type Planet struct {
 	Angle           float64
 }
 
-//NewPlanet -
+//NewPlanet returns a new Planet
 func NewPlanet(name string, angularVelocity float64, clockwise bool, radio float64, angle float64) *Planet {
 	return &Planet{
 		Name:            name,
@@ -26,7 +26,7 @@ func NewPlanet(name string, angularVelocity float64, clockwise bool, radio float
 	}
 }
 
-//Aging -
+//Aging makes the planet age the amount of days given
 func (p *Planet) Aging(days float64) {
 	var total float64
 
@@ -45,7 +45,7 @@ func (p *Planet) Aging(days float64) {
 	}
 }
 
-//GetCoordinates -
+//GetCoordinates returns the cartesian coordinates of the planet
 func (p *Planet) GetCoordinates() geo.Point {
 	return geo.PolarToCartesian(p.Angle, p.Radio)
 }

@@ -5,14 +5,14 @@ type Galaxy struct {
 	Planets []*Planet
 }
 
-//NewGalaxy -
+//NewGalaxy returns a Galaxy
 func NewGalaxy(planets ...*Planet) *Galaxy {
 	return &Galaxy{
 		Planets: planets,
 	}
 }
 
-//Aging -
+//Aging makes the galaxy age the amount of days given
 func (g *Galaxy) Aging(days float64) {
 	for _, p := range g.Planets {
 		p.Aging(days)

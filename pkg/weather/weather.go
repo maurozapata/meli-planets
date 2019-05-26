@@ -22,7 +22,7 @@ const (
 	IMPOSSIBLETOPREDICT = "imposible predecir"
 )
 
-//PredictExtendedWeather -
+//PredictExtendedWeather return the extended weather of the galaxy
 func PredictExtendedWeather(galaxy *model.Galaxy, days int) map[int]string {
 	periods := map[string]int{}
 
@@ -82,7 +82,7 @@ func getPerimeterOfGalaxy(galaxy *model.Galaxy) float64 {
 	return geo.GetPerimeterOfTriangle(p1, p2, p3)
 }
 
-//GetCurrentWeather -
+//GetCurrentWeather returns the current weather of the galaxy
 func GetCurrentWeather(galaxy *model.Galaxy) string {
 
 	if len(galaxy.Planets) < 3 {
