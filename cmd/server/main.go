@@ -14,20 +14,17 @@ func main() {
 	fmt.Println("Server started")
 
 	if godotenv.Load(".env") != nil {
-		fmt.Println("Error loading .env file")
-		return
+		panic("Error loading .env file")
 	}
 
 	db, err := initRedis()
 	if err != nil {
-		fmt.Println("Unable to connect redisdb")
-		return
+		panic("Unable to connect redisdb")
 	}
 
 	server := server.GetEngine(db)
 	if server.Run(":"+os.Getenv("PORT")) != nil {
-		fmt.Println("Error running server")
-		return
+		panic("Error running server")
 	}
 }
 
