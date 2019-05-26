@@ -40,10 +40,10 @@ func main() {
 }
 
 func initRedis() (*redis.Client, error) {
-	database, _ := strconv.Atoi(os.Getenv("DATABASE"))
+	database, _ := strconv.Atoi(os.Getenv("REDIS_DATABASE"))
 	params := redis.Params{
-		Address:  os.Getenv("ADDRESS"),
-		Password: os.Getenv("PASSWORD"),
+		Address:  os.Getenv("REDIS_ADDRESS"),
+		Password: os.Getenv("REDIS_PASSWORD"),
 		Database: database,
 	}
 
