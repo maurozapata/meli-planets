@@ -17,6 +17,11 @@ PORT=7080
 API_AUTH_TOKEN="localtoken"
 ```
 
+Descargar las dependencias del proyecto
+```
+go get ./...
+```
+
 Correr la tool que calculara el clima de los proximos 10 años
 ```
 go run cmd/tool/main.go
